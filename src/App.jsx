@@ -20,6 +20,7 @@ function App() {
   return (
     <div className={styles.app}>
       <h1 className={styles.title}>Budnect</h1>
+      <p className={styles.subtitle}>connect your buddies</p>
       <ContactsForm />
       <SearchBox />
       {loading && <p>Loading contacts...</p>}
