@@ -1,48 +1,30 @@
-import { useEffect, useState } from "react";
-import contacts from "./data/contact.json";
-import "./App.css";
-import ContactForm from "./components/ContactForm/ContactForm";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchContacts } from "./redux/contactsOps";
+import { selectLoading, selectError } from "./redux/contactsSlice";
+
+import ContactsForm from "./components/ContactForm/ContactForm";
 import SearchBox from "./components/SearchBox/SearchBox";
 import ContactList from "./components/ContactList/ContactList";
+import styles from "./App.module.css";
 
 function App() {
-  const localeContacts = () => {
-    const savedContacts = localStorage.getItem("Contacts");
-    return savedContacts ? JSON.parse(savedContacts) : contacts;
-  };
-  const [contact, setContact] = useState(localeContacts);
-
-  const [filter, setFilter] = useState("");
+  const dispatch = useDispatch();
+  const loading = useSelector(selectLoading);
+  const error = useSelector(selectError);
 
   useEffect(() => {
-    window.localStorage.setItem("Contacts", JSON.stringify(contact));
-  }, [contact]);
-
-  const addContact = (newContact) => {
-    setContact((prevContact) => {
-      return [...prevContact, newContact];
-    });
-  };
-  const handleDelete = (contactId) => {
-    setContact((prevContact) => {
-      return prevContact.filter((contact) => contact.id !== contactId);
-    });
-  };
-  const searchContact = contact.filter((cont) =>
-    cont.name.toLowerCase().includes(filter.toLowerCase())
-  );
-  const changeFilter = (value) => {
-    setFilter(value);
-  };
+    dispatch(fetchContacts());
+  }, [dispatch]);
 
   return (
-    <div>
-      <h1>Phonebook</h1>
-      <div className="card">
-        <ContactForm addContact={addContact} />
-        <SearchBox changeFilter={changeFilter} filter={filter} />
-      </div>
-      <ContactList handleDelete={handleDelete} contact={searchContact} />
+    <div className={styles.app}>
+      <h1 className={styles.title}>Budnect</h1>
+      <ContactsForm />
+      <SearchBox />
+      {loading && <p>Loading contacts...</p>}
+      {error && <p style={{ color: "red" }}>{error}</p>}
+      <ContactList />
     </div>
   );
 }
