@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- Background gradient -->
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4DB6AC" />
+      <stop offset="100%" stop-color="#00897B" />
+    </linearGradient>
+  </defs>
+  <!-- Background circle -->
+  <circle cx="32" cy="32" r="32" fill="url(#bgGradient)" />
+  
+  <!-- Left head -->
+  <circle cx="22" cy="26" r="6" fill="#fff" />
+  <!-- Left body (abstract gesture) -->
+  <path d="M18,36 Q22,30 26,36" stroke="#fff" stroke-width="2" fill="none" />
+  
+  <!-- Right head -->
+  <circle cx="42" cy="26" r="6" fill="#fff" />
+  <!-- Right body -->
+  <path d="M38,36 Q42,30 46,36" stroke="#fff" stroke-width="2" fill="none" />
+  
+  <!-- Connection element symbolizing a friendly handshake/embrace -->
+  <path d="M26,36 Q32,44 38,36" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round"/>
+</svg>
